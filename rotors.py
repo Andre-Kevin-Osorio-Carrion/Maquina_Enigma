@@ -25,6 +25,7 @@ def rotor1(resposta):
             res = operacio % 26
  
             lista_rotor1 = lista_rotor1 + alfabet_rotor[res]
+            posicio1 = (posicio1 + 1) % 26
        
         return lista_rotor1
    
@@ -53,6 +54,7 @@ def rotor2(resposta):
             res = operacio % 26
  
             lista_rotor2 = lista_rotor2 + alfabet_rotor[res]
+            posicio1 = (posicio1 + 1) % 26
        
         return lista_rotor2
  
@@ -60,7 +62,7 @@ def rotor3(resposta):
     posicio1 = 0
     lista_rotor3 = ""
  
-    with open("Rotor2.txt", "r") as r3:
+    with open("Rotor3.txt", "r") as r3:
         alfabet_rotor = r3.readline().strip()
         p_i = r3.readline().strip()            
  
@@ -81,6 +83,6 @@ def rotor3(resposta):
             res = operacio % 26
  
             lista_rotor3 = lista_rotor3 + alfabet_rotor[res]
+            posicio1 = (posicio1 + 1) % 26
        
         return lista_rotor3
- 

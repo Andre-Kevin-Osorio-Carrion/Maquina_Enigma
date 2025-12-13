@@ -9,7 +9,17 @@ def menu():
     print("        3. Editar rotors\n")
     print("           4. Sortir")
     print("***********************************\n")
- 
+
+def menu_rotor():
+    print()
+    print("***********************************")
+    print("        MODIFIACIO DE ROTORS")
+    print("***********************************")
+    print("           1. ROTOR DRET\n")
+    print("        2. ROTOR DEL CENTRE\n")
+    print("          3. ROTOR ESQUERRA")
+    print("***********************************\n")
+
 def resposta_usauri():
     while True:
         try: #Primero que intente ejecutar esto en el caso que sea un int seguira.
@@ -75,19 +85,26 @@ def xifrar_missatge():
                 if len(letras_5) > 0:
                     xf.write(letras_5)
             break
+
+    with open("Xifrat.txt", "r") as xf:
+        lectura = xf.read()
+        lectura = lectura.replace(" ", "").replace("\n", "")
+        lletras = len(lectura)
+        lletras_5 = ""
+        contador = 0
+
+        for lletra in lectura:
+            lletras_5 = lletras_5 + lletra
+            if len(lletras_5) == 5:
+                contador += 1
+                lletras_5 = ""
+
+    print("*******************************************************************************")
+    print(f"[OK] Missatge xifrat a 'Xifrat.txt' ({lletras} lletres, {contador} grups de 5)")
+    print("*******************************************************************************")
                             
 def desxifrar_missatge():
     ...
-
-def menu_rotor():
-    print()
-    print("***********************************")
-    print("        MODIFIACIO DE ROTORS")
-    print("***********************************")
-    print("           1. ROTOR DRET\n")
-    print("        2. ROTOR DEL CENTRE\n")
-    print("          3. ROTOR ESQUERRA")
-    print("***********************************\n")
 
 def editar_rotor():
     
@@ -108,7 +125,7 @@ def bucle_rotor(resposta):
 
     with open(f"Rotor{resposta}.txt", "w") as rotor:
         while True:
-            cablejat = input("Escriu la teva propi cablejat: ").upper()
+            cablejat = input("Escriu el teu propi cablejat: ").upper()
             if len(cablejat) == 26:
                 abcedari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 valid = True  # FET AMB IA per detectar errors de validacio
@@ -123,10 +140,17 @@ def bucle_rotor(resposta):
                         valid = False
                         break
 
-                if valid:  # FET AMB IA per escriure només si la permutació és correcta
+
+                if valid:  # FET AMB IA per escriure nomes si la permutació és correcta
                     rotor.write(f"{cablejat}\n")
-                    print("[OK] La teva permutació s'ha guardat correctament")
-                    break
+                    while True:
+                        notch = input("Escriu la posicio claus (notch) que vols A-Z: ").upper()
+                        if notch in abcedari:
+                            rotor.write(notch)
+                            print("[OK] La teva permutació s'ha guardat correctament")
+                            return
+                        else:
+                            print("[ERROR] Posicio clau incorrecta — úniques A–Z")
                 else:
                     print(error)
             else:
