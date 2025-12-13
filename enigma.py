@@ -1,16 +1,14 @@
 import rotors
 
 def menu():
+    print("***********************************")
     print("             ENIGMA            ")
-    print("-------------------------------")
-    print("       1. Xifrar missatge      ")
-    print()
-    print("     2. Desxifrar missatge     ")
-    print()
-    print("        3. Editar rotors       ")
-    print()
-    print("           4. Sortir           ")
-    print()
+    print("***********************************")
+    print("       1. Xifrar missatge\n")
+    print("     2. Desxifrar missatge\n")
+    print("        3. Editar rotors\n")
+    print("           4. Sortir")
+    print("***********************************\n")
  
 def resposta_usauri():
     while True:
@@ -32,7 +30,7 @@ def opcio_escollida(usuari):
     elif 2 == usuari:
         desxifrar_missatge()
     elif 3 == usuari:
-        ...
+        editar_rotor()
     elif 4 == usuari:
         sortir()
  
@@ -47,7 +45,6 @@ def xifrar_missatge():
     ">": "", "·": "", " ": "", "1": "", "2": "", "3": "", "4": "", "5": "", "6": "",
     "7": "", "8": "", "9": "", "0": ""
     }
-
 
     while True:
         r = input("Escriu el misatge que vols xifrar: ").upper()
@@ -82,13 +79,58 @@ def xifrar_missatge():
 def desxifrar_missatge():
     ...
 
-def editar_rotor():
-    ...
+def menu_rotor():
+    print()
+    print("***********************************")
+    print("        MODIFIACIO DE ROTORS")
+    print("***********************************")
+    print("           1. ROTOR DRET\n")
+    print("        2. ROTOR DEL CENTRE\n")
+    print("          3. ROTOR ESQUERRA")
+    print("***********************************\n")
 
+def editar_rotor():
+    
+    while True:
+        menu_rotor()
+        resposta = int(input("Quin rotor vols modificar: "))
+
+        if 0 < resposta == 1 or resposta == 2 or resposta == 3:
+            bucle_rotor(resposta)
+            break
+        else:
+            print("[ERROR] Opció: Aquesta opció no existeix, escull un altre.")
+            continue
+
+def bucle_rotor(resposta):
+
+    error = "[ERROR] permutació incorrecta — calen 26 lletres úniques A–Z"
+
+    with open(f"Rotor{resposta}.txt", "w") as rotor:
+        while True:
+            cablejat = input("Escriu la teva propi cablejat: ").upper()
+            if len(cablejat) == 26:
+                abcedari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                valid = True  # FET AMB IA per detectar errors de validacio
+
+                for lletra in abcedari:
+                    comptador = 0  
+                    for lletra_p in cablejat:
+                        if lletra_p == lletra:
+                            comptador += 1  
+
+                    if comptador != 1:  # FET AMB IA per verificar que cada lletra apareix exactament una vegada
+                        valid = False
+                        break
+
+                if valid:  # FET AMB IA per escriure només si la permutació és correcta
+                    rotor.write(f"{cablejat}\n")
+                    print("[OK] La teva permutació s'ha guardat correctament")
+                    break
+                else:
+                    print(error)
+            else:
+                print(error)
+           
 def sortir():
     exit #Tancara el programa
-
-
-
-
-
