@@ -105,7 +105,32 @@ def xifrar_missatge():
     print("*******************************************************************************")
                             
 def desxifrar_missatge():
-    ...
+    with open("Xifrat.txt", "r") as xf:                 # Llegir el missatge xifrat del fitxer
+        missatge_xifrat = xf.read()
+
+                                                            # Eliminar espais i salts de línia per obtenir el text xifrat pur
+                                                            # missatge_xifrat_pur és el resultat de rotor3
+    missatge_xifrat_pur = missatge_xifrat.replace(" ", "").replace("\n", "")
+    
+    if not missatge_xifrat_pur:
+        print("El fitxer 'Xifrat.txt' està buit.")
+        return
+
+    # Aplicar els rotors inversos en ordre invers
+    d3_invers = rotors.rotor3_invers(missatge_xifrat_pur)    # Desxifrat R3 invers (Obtenim l'output de R2)
+    
+    d2_invers = rotors.rotor2_invers(d3_invers)              # Desxifrat R2 invers 
+
+    missatge_desxifrat_net = rotors.rotor1_invers(d2_invers) # Desxifrat R1 invers (Obtenim el missatge original net)
+    
+    # El missatge desxifrat_net és el missatge sense símbols ni accents.
+    
+    print("\n*******************************************************************************")
+    print(" Missatge Desxifrat (Sense espais, símbols ni accents) ")
+    print("*******************************************************************************")
+    print(missatge_desxifrat_net)
+    print("*******************************************************************************")
+    
 
 def editar_rotor():
     
