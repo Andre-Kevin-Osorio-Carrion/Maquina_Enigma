@@ -106,8 +106,7 @@ def rotor_invers(missatge_xifrat, nom_fitxer_rotor):            #Lògica inversa
         
         idx_in_rotor = alfabet_rotor.find(lletras_xifrada)      # Trobem l'índex de la lletra xifrada dins del cablejat del rotor
         
-        if idx_in_rotor == -1:
-            # Si no és una lletra, l'afegim (encara que el teu xifrat només produeix lletres majúscules)
+        if idx_in_rotor == -1:                                  # Si no és una lletra, l'afegim 
             missatge_desxifrat += lletras_xifrada
             
         else:                                                   # Calculem l'índex de la lletra original (posicio2) amb la fórmula inversa
